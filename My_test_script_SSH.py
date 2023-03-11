@@ -1,7 +1,7 @@
 #Modules
-#import Adafruit_DHT
+import Adafruit_DHT
 import datetime
-#import serial
+import serial
 import csv
 import time
 import paramiko
@@ -175,7 +175,7 @@ def newMonth():
 while True:
     ''' UNCOMMENT'''
     #temperature, humidity = dhtdata()
-    #PM25,PM10=dylosdata()
+    PM25,PM10=dylosdata()
 
     #Line below: writes timestamp all in one cell
     date = str(datetime.datetime.now())
@@ -188,15 +188,12 @@ while True:
     #minute=datetime.datetime.now().minute
     #change all data to include each unit of time
 
-
-    ''' UNCOMMENT'''
-    #alldata=[date, pm10, pm25,temperature, humidity]
-    alldata = [date, 10, 20, 30, 40]
-
+    
+    alldata=[date, pm10, pm25,temperature, humidity]
+    
     csvPath = cssv(alldata);
 
     # UPLOAD UPDATED CSV SHEET TO CLUSTER EVERY 24 HOURS (WILL OVERWRITE PREV EXISTING ONE)
-    ''' UNCOMMENT'''
     if(hasBeenHour()):
         serverClients = Establish_SFTP_Connection()
         SFTPClient = serverClients[0]
